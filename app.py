@@ -58,4 +58,9 @@ def ask():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    import argparse
+    parser = argparse.ArgumentParser(description='Run the WEPR backend.')
+    parser.add_argument('--port', type=int, default=8000, help='Port to run the server on')
+    args = parser.parse_args()
+    
+    app.run(debug=True, port=args.port)
