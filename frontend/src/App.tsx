@@ -36,7 +36,9 @@ function App() {
 
   useEffect(() => {
     // Fetch available models
-    fetch(`${API_URL}/models`)
+    fetch(`${API_URL}/models`, {
+      headers: { 'ngrok-skip-browser-warning': 'true' }
+    })
       .then(res => res.json())
       .then((data: Model[]) => {
         setModels(data);
@@ -55,7 +57,10 @@ function App() {
     try {
       const response = await fetch(`${API_URL}/ask`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true'
+        },
         body: JSON.stringify({
           prompt: content,
           model: selectedModel,
