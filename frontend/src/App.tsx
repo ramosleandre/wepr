@@ -31,9 +31,12 @@ function App() {
   const [topK, setTopK] = useState<number>(20);
   const [seed, setSeed] = useState<string>('');
 
+  // API URL configuration
+  const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5001';
+
   useEffect(() => {
     // Fetch available models
-    fetch('http://127.0.0.1:5001/models')
+    fetch(`${API_URL}/models`)
       .then(res => res.json())
       .then((data: Model[]) => {
         setModels(data);
@@ -50,7 +53,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:5001/ask', {
+      const response = await fetch(`${API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
